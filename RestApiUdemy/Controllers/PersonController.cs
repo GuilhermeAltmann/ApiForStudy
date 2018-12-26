@@ -26,7 +26,7 @@ namespace RestApiUdemy.Controllers
         {
 
             return Ok(_personService.FindAll());
-        }
+        } 
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
