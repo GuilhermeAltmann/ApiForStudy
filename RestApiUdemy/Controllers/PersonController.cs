@@ -47,15 +47,22 @@ namespace RestApiUdemy.Controllers
             return new ObjectResult(_personService.Create(person));
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Person person)
+        public IActionResult Put([FromBody] Person person)
         {
             if (person == null) return BadRequest();
 
-            return new ObjectResult(_personService.Update(person));
+            var updatedPerson = _personService.Update(person);
+
+            if(updatedPerson == null)
+            {
+
+                return NoContent();
+            }
+
+            return new ObjectResult(updatedPerson);
         }
 
-        [HttpDelete("{delete}")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
 
