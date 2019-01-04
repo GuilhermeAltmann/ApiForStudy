@@ -46,7 +46,7 @@ namespace RestApiUdemy
                 {
                     var cnx = new MySql.Data.MySqlClient.MySqlConnection(connection);
 
-                    var evolve = new Evolve.Evolve(cnx, msg => _logger.LogInformation(msg))
+                    var evolve = new Evolve.Evolve("Evolve.json", cnx, msg => _logger.LogInformation(msg))
                     {
                         Locations = new List<string> { "db/migrations" },
                         IsEraseDisabled = true,
@@ -66,6 +66,7 @@ namespace RestApiUdemy
 
             //Dependency Injection
             services.AddScoped<IPerson, PersonService> ();
+            services.AddScoped<IBook, BookService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

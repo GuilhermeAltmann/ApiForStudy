@@ -1,0 +1,9 @@
+﻿CREATE TABLE `books` (
+	`Id`  INT(10)  UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `Author` LONGTEXT,
+    `LaunchDate` DATETIME(6) NOT NULL,
+    `Price` DECIMAL(65,2) NOT NULL,
+    `Title` LONGTEXT
+)
+ENGINE=InnoDB
+;
