@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RestApiUdemy.Models.Context;
 using RestApiUdemy.Repositories;
+using RestApiUdemy.Repositories.Generic;
 using RestApiUdemy.Services;
 
 namespace RestApiUdemy
@@ -67,6 +68,8 @@ namespace RestApiUdemy
             //Dependency Injection
             services.AddScoped<IPerson, PersonService> ();
             services.AddScoped<IBook, BookService>();
+
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,38 +12,90 @@ namespace RestApiUdemy.Repositories.Generic
     {
 
         private readonly MySqlContext _context;
-        private DbSet<T> dataset;
+        private DbSet<T> _dataset;
 
         public GenericRepository(MySqlContext context)
         {
 
             _context = context;
-            dataset = _context.Set<T>();
+            _dataset = _context.Set<T>();
         }
 
         public T Create(T item)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                _dataset.Add(item);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return item;
         }
 
         public void Delete(long id)
         {
-            throw new NotImplementedException();
+
+            var result = _dataset.SingleOrDefault(p => p.Id.Equals(id));
+            try
+            {
+                if (result != null)
+                {
+
+                    _dataset.Remove(result);
+                    _context.SaveChanges();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public List<T> FindAll()
         {
-            throw new NotImplementedException();
+
+            return _dataset.ToList();
         }
 
         public T FindById(long id)
         {
-            throw new NotImplementedException();
+            return _dataset.SingleOrDefault(p => p.Id.Equals(id));
         }
 
         public T Update(T item)
         {
-            throw new NotImplementedException();
+
+            if (!Exist(item.Id))
+            {
+
+                return null;
+            }
+
+            var result = _dataset.SingleOrDefault(p => p.Id.Equals(item.Id));
+            try
+            {
+
+                _context.Entry(result).CurrentValues.SetValues(item);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return item;
+        }
+
+        private bool Exist(long? id)
+        {
+            return _dataset.Any(p => p.Id.Equals(id));
         }
     }
 }

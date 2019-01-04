@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestApiUdemy.Models;
 using RestApiUdemy.Repositories;
+using RestApiUdemy.Repositories.Generic;
 
 namespace RestApiUdemy.Controllers
 {
@@ -13,9 +14,9 @@ namespace RestApiUdemy.Controllers
     [ApiController]
     public class BookController : Controller
     {
-        private IBook _bookService;
+        private IRepository<Book> _bookService;
 
-        public BookController(IBook bookService)
+        public BookController(IRepository<Book> bookService)
         {
 
             _bookService = bookService;

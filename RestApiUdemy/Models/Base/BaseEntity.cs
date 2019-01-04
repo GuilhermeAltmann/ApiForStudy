@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestApiUdemy.Models.Base
 { 
-    [DataContract]
+    //[DataContract]
     public class BaseEntity
     {
 

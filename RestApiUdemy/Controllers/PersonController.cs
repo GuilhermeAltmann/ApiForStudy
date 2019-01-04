@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RestApiUdemy.Models;
 using RestApiUdemy.Repositories;
+using RestApiUdemy.Repositories.Generic;
 
 namespace RestApiUdemy.Controllers
 {
@@ -13,9 +14,9 @@ namespace RestApiUdemy.Controllers
     public class PersonController : Controller
     {
 
-        private IPerson _personService;
+        private IRepository<Person> _personService;
 
-        public PersonController(IPerson personService)
+        public PersonController(IRepository<Person> personService)
         {
 
             _personService = personService;
@@ -42,7 +43,7 @@ namespace RestApiUdemy.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Person person)
         {
-            if (person == null) return BadRequest();
+             if (person == null) return BadRequest();
 
             return new ObjectResult(_personService.Create(person));
         }
